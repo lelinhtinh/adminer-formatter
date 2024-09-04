@@ -1,0 +1,24 @@
+{
+  "name": "Adminer Formatter",
+  "manifest_version": 3,
+  "version": "0.1",
+  "description": "Format SQL query in Adminer",
+  "permissions": ["scripting"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["libs/jush.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["libs/sql-formatter.min.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
