@@ -18,8 +18,9 @@
   if (!$buttonWrapper) return;
 
   const $formatBtn = $.createElement('button');
-  $formatBtn.textContent = 'Format';
-  $formatBtn.style = 'float: right;';
+  $formatBtn.textContent =
+    document.documentElement.lang === 'vi' ? 'Định dạng' : 'Format';
+  $formatBtn.style = 'margin-left: 40px;';
 
   $formatBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -27,13 +28,26 @@
     const $pre = $.querySelector('#form pre');
     if (!$pre) return;
 
+    const dbDriver =
+      $.querySelector('#breadcrumb > a:first-of-type')
+        ?.textContent.trim()
+        .toLowerCase() ?? 'sql';
+    $formatBtn.setAttribute('data-driver', dbDriver);
+
     const jushClass = Array.from($pre.classList).filter((e) =>
       e.includes('jush-')
     );
     const dbType = jushClass?.length ? jushClass[0].split('-').pop() : 'sql';
+    $formatBtn.setAttribute('data-type', dbType);
 
     const query = $queryEditor.value;
-    const formatted = sqlFormatter.format(query);
+    const formatted = sqlFormatter.format(query, {
+      language: dbDriver,
+      keywordCase: 'upper',
+      dataTypeCase: 'upper',
+      functionCase: 'upper',
+      identifierCase: 'lower',
+    });
     const highlighted = jush.highlight(dbType, formatted);
 
     $queryEditor.value = formatted;
