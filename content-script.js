@@ -25,13 +25,20 @@
   $formatBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
-    const $pre = $.querySelector('#form pre');
+    const $pre =
+      $queryEditor.previousElementSibling &&
+      $queryEditor.previousElementSibling.tagName === 'PRE'
+        ? $queryEditor.previousElementSibling
+        : $.querySelector('#form pre');
     if (!$pre) return;
 
-    const dbDriver =
+    let dbDriver =
       $.querySelector('#breadcrumb > a:first-of-type')
         ?.textContent.trim()
         .toLowerCase() ?? 'sql';
+    if (!sqlFormatter.supportedDialects.includes(dbDriver)) {
+      dbDriver = 'sql';
+    }
     $formatBtn.setAttribute('data-driver', dbDriver);
 
     const jushClass = Array.from($pre.classList).filter((e) =>
