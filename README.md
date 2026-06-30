@@ -28,7 +28,7 @@ The extension relies on a minified version of the `sql-formatter` package locate
 This project uses and is inspired by the following open-source projects:
 
 - [Adminer](https://github.com/vrana/adminer) (v5.4.2)
-- [SQL Formatter](https://github.com/sql-formatter-org/sql-formatter) (v15.8.0)
+- [SQL Formatter](https://github.com/sql-formatter-org/sql-formatter) (v15.8.2)
 
 ## License
 

@@ -1,7 +1,7 @@
 {
   "name": "Adminer Formatter",
   "manifest_version": 3,
-  "version": "0.5",
+  "version": "0.6",
   "description": "Format SQL query in Adminer",
   "icons": {
     "128": "images/icon.png"
